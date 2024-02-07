@@ -11,24 +11,9 @@
 #include <ESP32Encoder.h>
 ESP32Encoder enc1;
 ESP32Encoder enc2;
-int i;
+int i,j;
  
 void Lmotor(int i) {
-  Serial.print("i = ");
-  Serial.println(i);
-  /*if (i == 0) {
-    ledcWrite(0, 0);
-    ledcWrite(1, 0);
-  Serial.print("i = ");
-  Serial.print(i);
-  Serial.print(" ,L = ");
-  Serial.print(enc1.getCount());
-  Serial.print(" ,R = ");
-  Serial.println(enc2.getCount());
-  }
-  else if (i > 0) {
-    if (i > 1024){
-    //i = 1024;*/
     ledcWrite(0, i);
     ledcWrite(1, 0);
   Serial.print("i = ");
@@ -37,28 +22,10 @@ void Lmotor(int i) {
   Serial.print(enc1.getCount());
   Serial.print(" ,R = ");
   Serial.println(enc2.getCount());
-    }
-  /*}
-  else {
-    if (i < -1024){
-    //i = -1024;
-    ledcWrite(0, 0);
-    ledcWrite(1, -i);
-  Serial.print("i = ");
-  Serial.print(i);
-  Serial.print(" ,L = ");
-  Serial.print(enc1.getCount());
-  Serial.print(" ,R = ");
-  Serial.println(enc2.getCount());
-    }
-  }
-}*/
+}
  
-void Rmotor(int i) {
-  Serial.print("i = ");
-  Serial.println(i);
-  if (i == 0) {
-    ledcWrite(2, 0);
+void Rmotor(int j) {
+    ledcWrite(2, j);
     ledcWrite(3, 0);
   Serial.print("i = ");
   Serial.print(i);
@@ -66,37 +33,10 @@ void Rmotor(int i) {
   Serial.print(enc1.getCount());
   Serial.print(" ,R = ");
   Serial.println(enc2.getCount());
-  }
-  else if (i > 0) {
-    if (i > 1024){
-    //i = 1024;
-    ledcWrite(2, i);
-    ledcWrite(3, 0);
-  Serial.print("i = ");
-  Serial.print(i);
-  Serial.print(" ,L = ");
-  Serial.print(enc1.getCount());
-  Serial.print(" ,R = ");
-  Serial.println(enc2.getCount());
-    }
-  }
-  else {
-    if (i < -1024){
-    //i = -1024;
-    ledcWrite(2, 0);
-    ledcWrite(3, -i);
-  Serial.print("i = ");
-  Serial.print(i);
-  Serial.print(" ,L = ");
-  Serial.print(enc1.getCount());
-  Serial.print(" ,R = ");
-  Serial.println(enc2.getCount());
-    }
   }
 }
  
 void setup() {
-  // put your setup code here, to run once:
   Serial.begin(115200);
 
   
@@ -128,12 +68,13 @@ void setup() {
 }
  
 void loop() {
+  Lmotor(900);
+  Rmotor(900);
+  delay(1000);
   Lmotor(512);
+  Rmotor(512);
   delay(1000);
   Lmotor(0);
-  delay(1000);
-  /*Rmotor(512);
-  delay(1000);
   Rmotor(0);
-  delay(1000);&*/
+  delay(1000);
 }
